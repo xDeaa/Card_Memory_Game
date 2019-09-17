@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Button, View, FlatList, Image } from 'react-native';
+import { StyleSheet, Button, View, FlatList,} from 'react-native';
 import { Stopwatch } from 'react-native-stopwatch-timer';
+import Card from './src/components/Card';
 
 export default function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([{ score: 0, list: []}]);
+  const [selection, setSelection] = useState(null);
   const [timer, setTimer] = useState({
     isStart: false,
   })
 
   useEffect(() => {
-    let items = Array.apply(null, Array(12)).map((v, i) => {
-      return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), hidden: true };
-    });
-    setData(items);
+    let items = [
+      {id:1 , name:'a', hidden: true, done: false},
+      {id:2 , name:'a', hidden: true, done: false},
+      {id:3 , name:'b', hidden: true, done: false},
+      {id:4 , name:'b', hidden: true, done: false},
+      {id:5 , name:'c', hidden: true, done: false},
+      {id:6 , name:'c', hidden: true, done: false},
+      {id:7 , name:'d', hidden: true, done: false},
+      {id:8 , name:'d', hidden: true, done: false},
+      {id:9 , name:'e', hidden: true, done: false},
+      {id:10 , name:'e', hidden: true, done: false},
+      {id:11 , name:'f', hidden: true, done: false},
+      {id:12 , name:'f', hidden: true, done: false},
+    ]
+    setData({ ...data, list: items });
   }, []);
 
   const startStopTimer = () => {
@@ -23,6 +36,35 @@ export default function App() {
     this.currentTime = time;
   }
 
+  const showCard = (id) => {
+    const updateList = data.list.map((v, i) => {
+      if (v.id === id) {
+        return { ...v, hidden: false }
+      }
+      return v
+    })
+
+    setData({ ...data, list: updateList });
+  }
+
+  const updateSelection = (id) => {
+    if (selection === null) {
+      setSelection(data.list[id])
+      return;
+    }
+  
+    const secondCard = data.list[id];
+    
+    // (secondCard === selection) {
+    //   true !!
+    // } else {
+    //   false !!
+    // }
+  }
+
+  // console.log(data.list);
+  
+
   return (
     <View style={styles.MainContainer}>
       <Stopwatch
@@ -31,11 +73,9 @@ export default function App() {
         getTime={getFormattedTime}
       />
       <FlatList
-        data={data}
+        data={data.list}
         renderItem={({ item }) => (
-          <View style={{ flex: 1, margin: 2 }}>
-            <Image style={styles.imageThumbnail} source={{ uri: item.src }} />
-          </View>
+          <Card data={item} onClick={(value) => showCard(value)} onSelect={(value) => updateSelection(value)} selection={selection} />
         )}
         numColumns={4}
         keyExtractor={(item, index) => index.toString()}
