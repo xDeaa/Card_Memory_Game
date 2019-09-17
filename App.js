@@ -14,18 +14,30 @@ export default function App() {
 
   useEffect(() => {
     let items = [
-      { id: 0, name: 'a', hidden: true, done: false },
-      { id: 1, name: 'a', hidden: true, done: false },
-      { id: 2, name: 'b', hidden: true, done: false },
-      { id: 3, name: 'b', hidden: true, done: false },
-      { id: 4, name: 'c', hidden: true, done: false },
-      { id: 5, name: 'c', hidden: true, done: false },
-      { id: 6, name: 'd', hidden: true, done: false },
-      { id: 7, name: 'd', hidden: true, done: false },
-      { id: 8, name: 'e', hidden: true, done: false },
-      { id: 9, name: 'e', hidden: true, done: false },
-      { id: 10, name: 'f', hidden: true, done: false },
-      { id: 11, name: 'f', hidden: true, done: false },
+      { id: 0, name: 'bingo', hidden: true, done: false },
+      { id: 1, name: 'bingo', hidden: true, done: false },
+      { id: 2, name: 'camera', hidden: true, done: false },
+      { id: 3, name: 'camera', hidden: true, done: false },
+      { id: 4, name: 'carreau', hidden: true, done: false },
+      { id: 5, name: 'carreau', hidden: true, done: false },
+      { id: 6, name: 'cherry', hidden: true, done: false },
+      { id: 7, name: 'cherry', hidden: true, done: false },
+      { id: 8, name: 'clover', hidden: true, done: false },
+      { id: 9, name: 'clover', hidden: true, done: false },
+      { id: 10, name: 'diamond', hidden: true, done: false },
+      { id: 11, name: 'diamond', hidden: true, done: false },
+      { id: 12, name: 'grappe', hidden: true, done: false },
+      { id: 13, name: 'grappe', hidden: true, done: false },
+      { id: 14, name: 'heart', hidden: true, done: false },
+      { id: 15, name: 'heart', hidden: true, done: false },
+      { id: 16, name: 'lemon', hidden: true, done: false },
+      { id: 17, name: 'lemon', hidden: true, done: false },
+      { id: 18, name: 'seven', hidden: true, done: false },
+      { id: 19, name: 'seven', hidden: true, done: false },
+      { id: 20, name: 'slot', hidden: true, done: false },
+      { id: 21, name: 'slot', hidden: true, done: false },
+      { id: 22, name: 'spade', hidden: true, done: false },
+      { id: 23, name: 'spade', hidden: true, done: false },
     ]
     setData({ score: 0, list: items });
   }, []);
@@ -98,11 +110,9 @@ export default function App() {
     }
   }
 
-  console.log(data.score);
-
   return (
     <View style={styles.MainContainer}>
-      <Row style={{ margin: 10 }} justifyContent='space-between'>
+      <Row style={{ margin: 10, marginBottom: 10 }} justifyContent='space-between'>
         <Text>Score : {data.score}</Text>
         <Stopwatch
           laps
@@ -131,6 +141,6 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   timer: {
-    height: 100,
+    height: 150,
   },
 });

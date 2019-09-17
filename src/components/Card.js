@@ -5,6 +5,23 @@ import CardFlip from 'react-native-card-flip';
 const Card = ({ data, onClick, onSelect, selection }) => {
 
 
+    const getImage = (name) => {
+        switch(name) {
+            case 'bingo': return <Image style={styles.icon} source={require('../../assets/iconCard/bingo.png')}/>
+            case 'camera': return <Image style={styles.icon} source={require('../../assets/iconCard/camera.png')}/>
+            case 'carreau': return <Image style={styles.icon} source={require('../../assets/iconCard/carreau.png')}/>
+            case 'cherry': return <Image style={styles.icon} source={require('../../assets/iconCard/cherry.png')}/>
+            case 'clover': return <Image style={styles.icon} source={require('../../assets/iconCard/clover.png')}/>
+            case 'diamond': return <Image style={styles.icon} source={require('../../assets/iconCard/diamond.png')}/>
+            case 'grappe': return <Image style={styles.icon} source={require('../../assets/iconCard/grappe.png')}/>
+            case 'heart': return <Image style={styles.icon} source={require('../../assets/iconCard/heart.png')}/>
+            case 'lemon': return <Image style={styles.icon} source={require('../../assets/iconCard/lemon.png')}/>
+            case 'seven': return <Image style={styles.icon} source={require('../../assets/iconCard/seven.png')}/>
+            case 'slot': return <Image style={styles.icon} source={require('../../assets/iconCard/slot.png')}/>
+            case 'spade': return <Image style={styles.icon} source={require('../../assets/iconCard/spade.png')}/>
+        }
+    }
+
     const flipCard = async (id) => {
         onClick(id);
         this['card' + id].flip()
@@ -20,26 +37,33 @@ const Card = ({ data, onClick, onSelect, selection }) => {
     }
 
     return (
-        <CardFlip style={styles.flipCard} ref={(card) => this['card' + data.id] = card} >
-            <TouchableOpacity onPress={() => flipCard(data.id)} ><Image style={styles.image} source={require('../../assets/backCard.jpg')} /></TouchableOpacity>
-            <TouchableOpacity><Text>{data.name}</Text></TouchableOpacity>
-        </CardFlip>
+        <View style={{ flex: 1,marginTop: 30 }}>
+            <CardFlip style={styles.flipCard} ref={(card) => this['card' + data.id] = card} >
+                <TouchableOpacity onPress={() => flipCard(data.id)} ><Image style={styles.image} source={require('../../assets/backCard.jpg')} /></TouchableOpacity>
+                <TouchableOpacity>{getImage(data.name)}</TouchableOpacity>
+            </CardFlip>
+        </View>
+
     );
 }
 
 const styles = StyleSheet.create({
     image: {
         height: '100%',
-        width: '100%'
+        width: '100%',
+    },
+    icon: {
+        height: '75%',
+        width: '100%',
+        marginTop: 15
     },
     flipCard: {
-        flex: 1,
         borderWidth: 1,
         borderColor: 'black',
         backgroundColor: 'white',
-        width: 75,
+        width: 80,
         height: 125,
-        margin: 5,
+        margin: 2,
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
