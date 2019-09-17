@@ -6,8 +6,8 @@ Card memory is a game where you have to click on a card to see what image is und
 
 ## User Stories
 
--   [ ] User can see a grid with n x n cards (`n` is an integer). All the cards are faced down initially (`hidden` state)
--   [ ] User can click a button to start the game. When this button is clicked, a timer will start
+-   [X] User can see a grid with n x n cards (`n` is an integer). All the cards are faced down initially (`hidden` state)
+-   [X] User can click a button to start the game. When this button is clicked, a timer will start
 -   [ ] User can click on any card to unveil the image that is underneath it (change it to `visible` state). The image will be displayed until the user clicks on a 2nd card
 
 When the User clicks on the 2nd card:
