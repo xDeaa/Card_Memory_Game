@@ -27,13 +27,13 @@ const Card = ({ data, onClick, onSelect, selection }) => {
         this['card' + id].flip()
         onSelect(id);
 
-        // if (selection !== null) {
-        //     const selectedId = selection.id
-        //     if (selection.name !== data.name) {
-        //         this['card' + selectedId].jiggle()
-        //         this['card' + id].flip()
-        //     }
-        // }
+        if (selection !== null) {
+            const selectedId = selection.id
+            if (selection.name !== data.name) {
+                this['card' + selectedId].flip()
+                this['card' + id].flip()
+            }
+        }
     }
 
     return (

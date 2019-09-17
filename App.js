@@ -30,14 +30,10 @@ export default function App() {
       { id: 13, name: 'grappe', hidden: true, done: false },
       { id: 14, name: 'heart', hidden: true, done: false },
       { id: 15, name: 'heart', hidden: true, done: false },
-      { id: 16, name: 'lemon', hidden: true, done: false },
-      { id: 17, name: 'lemon', hidden: true, done: false },
+      { id: 16, name: 'spade', hidden: true, done: false },
+      { id: 17, name: 'spade', hidden: true, done: false },
       { id: 18, name: 'seven', hidden: true, done: false },
       { id: 19, name: 'seven', hidden: true, done: false },
-      { id: 20, name: 'slot', hidden: true, done: false },
-      { id: 21, name: 'slot', hidden: true, done: false },
-      { id: 22, name: 'spade', hidden: true, done: false },
-      { id: 23, name: 'spade', hidden: true, done: false },
     ]
     setData({ score: 0, list: items });
   }, []);
