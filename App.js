@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Button, View, FlatList,} from 'react-native';
+import { StyleSheet, Button, View, FlatList, Text } from 'react-native';
 import { Stopwatch } from 'react-native-stopwatch-timer';
 import Card from './src/components/Card';
+import Row from './src/components/Row';
+
 
 export default function App() {
-  const [data, setData] = useState([{ score: 0, list: []}]);
+  const [data, setData] = useState({ score: 0, list: [] });
   const [selection, setSelection] = useState(null);
   const [timer, setTimer] = useState({
     isStart: false,
@@ -12,20 +14,20 @@ export default function App() {
 
   useEffect(() => {
     let items = [
-      {id:1 , name:'a', hidden: true, done: false},
-      {id:2 , name:'a', hidden: true, done: false},
-      {id:3 , name:'b', hidden: true, done: false},
-      {id:4 , name:'b', hidden: true, done: false},
-      {id:5 , name:'c', hidden: true, done: false},
-      {id:6 , name:'c', hidden: true, done: false},
-      {id:7 , name:'d', hidden: true, done: false},
-      {id:8 , name:'d', hidden: true, done: false},
-      {id:9 , name:'e', hidden: true, done: false},
-      {id:10 , name:'e', hidden: true, done: false},
-      {id:11 , name:'f', hidden: true, done: false},
-      {id:12 , name:'f', hidden: true, done: false},
+      { id: 0, name: 'a', hidden: true, done: false },
+      { id: 1, name: 'a', hidden: true, done: false },
+      { id: 2, name: 'b', hidden: true, done: false },
+      { id: 3, name: 'b', hidden: true, done: false },
+      { id: 4, name: 'c', hidden: true, done: false },
+      { id: 5, name: 'c', hidden: true, done: false },
+      { id: 6, name: 'd', hidden: true, done: false },
+      { id: 7, name: 'd', hidden: true, done: false },
+      { id: 8, name: 'e', hidden: true, done: false },
+      { id: 9, name: 'e', hidden: true, done: false },
+      { id: 10, name: 'f', hidden: true, done: false },
+      { id: 11, name: 'f', hidden: true, done: false },
     ]
-    setData({ ...data, list: items });
+    setData({ score: 0, list: items });
   }, []);
 
   const startStopTimer = () => {
@@ -47,31 +49,68 @@ export default function App() {
     setData({ ...data, list: updateList });
   }
 
-  const updateSelection = (id) => {
+  const hideCards = (firstId, secondId) => {
+    const updateList = data.list.map((v, i) => {
+      if (v.id === firstId || v.id === secondId) {
+        return { ...v, hidden: true }
+      }
+      return v
+    })
+
+    setData({ ...data, list: updateList });
+  }
+
+  const doneCards = (firstId, secondId) => {
+    const updateList = data.list.map((v, i) => {
+      if (v.id === firstId || v.id === secondId) {
+        return { ...v, onDone: true }
+      }
+      return v
+    })
+
+    setData({ ...data, list: updateList });
+  }
+
+  const updateSelection = async (id) => {
     if (selection === null) {
       setSelection(data.list[id])
       return;
     }
-  
+
     const secondCard = data.list[id];
-    
-    // (secondCard === selection) {
-    //   true !!
-    // } else {
-    //   false !!
-    // }
+
+    if (secondCard.name === selection.name) {
+      console.log("pareil");
+      if (data.score === 0)
+        setData({ ...data, score: 10 });
+      else
+        setData({ ...data, score: data.score * 2 })
+
+      doneCards(selection.id, id);
+      setSelection(null)
+      return;
+    }
+    else {
+      console.log("dommage");
+      hideCards(selection.id, id)
+      setSelection(null);
+      return;
+    }
   }
 
-  // console.log(data.list);
-  
+  console.log(data.score);
 
   return (
     <View style={styles.MainContainer}>
-      <Stopwatch
-        laps
-        start={timer.isStart}
-        getTime={getFormattedTime}
-      />
+      <Row style={{ margin: 10 }} justifyContent='space-between'>
+        <Text>Score : {data.score}</Text>
+        <Stopwatch
+          laps
+          start={timer.isStart}
+          options={styles.timer}
+          getTime={getFormattedTime}
+        />
+      </Row>
       <FlatList
         data={data.list}
         renderItem={({ item }) => (
@@ -91,9 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 60,
   },
-  imageThumbnail: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  timer: {
     height: 100,
   },
 });
